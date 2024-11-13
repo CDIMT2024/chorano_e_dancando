@@ -4,6 +4,7 @@ import spotipy
 import os
 from utils import get_rf
 import pandas as pd
+import seaborn as sns
 
 # Set up Spotipy with Spotify API credentials
 client_id = os.getenv("CLIENT_ID0")
@@ -110,6 +111,49 @@ if search_query:
                 ]
             )
             genre = model.predict(df)[0]
+            import matplotlib.pyplot as plt
+
+            # Get the prediction probabilities for each genre
+            y_val_pred_proba = model.predict_proba(df)
+            certainty_percentages = y_val_pred_proba[0] * 100
+
+            # Create a DataFrame for certainty percentages
+            certainty_df = pd.DataFrame({
+                "Genre": model.classes_,
+                "Certainty Percentage": certainty_percentages
+            })
+
+            # Display certainty percentages as a table
+            st.markdown("### Prediction Certainty Percentages")
+
+            # Map colors to genres
+            bar_colors = [genre_styles.get(genre.lower(), {"color": "#000000"})["color"] for genre in model.classes_]
+
+            # Create a bar chart with custom colors and improved aesthetics
+            fig, ax = plt.subplots(figsize=(8, 6))
+            sns.barplot(
+                x="Genre",
+                y="Certainty Percentage",
+                data=certainty_df,
+                palette=bar_colors,
+                ax=ax,
+            )
+
+            # Add value labels on top of each bar
+            for i, p in enumerate(ax.patches):
+                height = p.get_height()
+                ax.text(p.get_x() + p.get_width() / 2., height + 1,
+                        f'{height:.1f}%',
+                        ha="center", color="black", fontsize=12)
+
+            ax.set_xlabel("Genre", fontsize=14)
+            ax.set_ylabel("Certainty Percentage (%)", fontsize=14)
+            ax.set_title("Genre Prediction Certainty", fontsize=16)
+            plt.xticks(rotation=45)
+            plt.tight_layout()
+
+            # Display the chart in Streamlit
+            st.pyplot(fig)
 
             # Get the color and emoji for the genre
             genre_style = genre_styles.get(
