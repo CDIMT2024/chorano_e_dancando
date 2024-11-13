@@ -45,10 +45,6 @@ if search_query:
             df = df.drop(
                 columns=['id', 'uri', 'track_href', 'analysis_url', 'type', 'time_signature']
             )
-            chart_data = df[['danceability', 'energy', 'loudness', 'speechiness', 
-                             'acousticness', 'instrumentalness', 'liveness', 'valence', 'tempo']]
-            
-            st.bar_chart(chart_data.T)  # Transpose for better readability in bar chart
             genre = model.predict(df)[0]
             st.write(f"The predicted genre is: {genre}")
 
