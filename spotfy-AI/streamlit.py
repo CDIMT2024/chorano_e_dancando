@@ -2,8 +2,10 @@ import streamlit as st
 from spotipy.oauth2 import SpotifyClientCredentials
 import spotipy
 import os
+from dotenv import load_dotenv
 from utils import get_rf
 import pandas as pd
+load_dotenv()
 # Set up Spotipy with Spotify API credentials
 client_id = os.getenv('CLIENT_ID0')
 client_secret = os.getenv('CLIENT_SECRET0')
@@ -14,7 +16,6 @@ sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 # Streamlit app title
 st.title("Spotify Music Search")
-
 # Search bar for track name
 search_query = st.text_input("Search for a track:")
 
@@ -46,6 +47,10 @@ if search_query:
             df = df.drop(
                 columns=['id', 'uri', 'track_href', 'analysis_url', 'type', 'time_signature']
             )
+            chart_data = df[['danceability', 'energy', 'loudness', 'speechiness', 
+                             'acousticness', 'instrumentalness', 'liveness', 'valence', 'tempo']]
+            
+            st.bar_chart(chart_data.T)  # Transpose for better readability in bar chart
             genre = model.predict(df)[0]
             st.write(f"The predicted genre is: {genre}")
 
