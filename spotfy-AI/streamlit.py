@@ -2,10 +2,8 @@ import streamlit as st
 from spotipy.oauth2 import SpotifyClientCredentials
 import spotipy
 import os
-from dotenv import load_dotenv
 from utils import get_rf
 import pandas as pd
-load_dotenv()
 # Set up Spotipy with Spotify API credentials
 client_id = os.getenv('CLIENT_ID0')
 client_secret = os.getenv('CLIENT_SECRET0')
