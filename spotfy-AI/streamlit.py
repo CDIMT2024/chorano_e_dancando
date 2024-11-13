@@ -124,7 +124,7 @@ if search_query:
             })
 
             # Display certainty percentages as a table
-            st.markdown("### Prediction Certainty Percentages")
+            st.title("Prediction Certainty Percentages")
 
             # Map colors to genres
             bar_colors = [genre_styles.get(genre.lower(), {"color": "#000000"})["color"] for genre in model.classes_]
@@ -154,7 +154,6 @@ if search_query:
 
             # Display the chart in Streamlit
             st.pyplot(fig)
-
             # Get the color and emoji for the genre
             genre_style = genre_styles.get(
                 genre.lower(), {"color": "#000000", "emoji": "🎵"}
