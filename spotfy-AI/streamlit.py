@@ -124,13 +124,13 @@ if search_query:
             })
 
             # Display certainty percentages as a table
-            st.title("Prediction Certainty Percentages")
+            st.markdown("## Prediction Certainty Percentages")
 
             # Map colors to genres
             bar_colors = [genre_styles.get(genre.lower(), {"color": "#000000"})["color"] for genre in model.classes_]
 
             # Create a bar chart with custom colors and improved aesthetics
-            fig, ax = plt.subplots(figsize=(8, 6))
+            fig, ax = plt.subplots(figsize=(10, 8))
             sns.barplot(
                 x="Genre",
                 y="Certainty Percentage",
