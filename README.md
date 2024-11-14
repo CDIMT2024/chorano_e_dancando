@@ -13,3 +13,7 @@
 
 ## 📄 Artigo
 📚 [Acesse o artigo aqui](https://steady-hisser-9da.notion.site/An-lise-de-Faixas-no-Spotify-13d48efb858e8075a769dbbbb10429ea#13d48efb858e803f92d3e54418f59f7a)
+
+## 👀 Vídeo 
+🎥 [Acesse o vídeo aqui](https://youtu.be/fYo0iKh0CXo?si=GJBmfQWttUhu0PB2)
+
